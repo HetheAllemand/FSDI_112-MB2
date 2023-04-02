@@ -15,11 +15,11 @@ class PostListView(ListView):
         context = super().get_context_data(**kwargs)
         published_status = Status.objects.get(name="published")
         context["post_lsit"] = Post.objects.filter(
-            status=published_status).order_by("created_on").reverse()
+            status=published_status).order_by("created_at").reverse()
         context["timestamp"] =datetime.now().strftime("%F %H:%M:%S")
         return context
 
-class DraftPostListView(ListView):
+class DraftPostListView(LoginRequiredMixin, ListView):
     template_name = "posts/list.html"
     model = Post
 
@@ -28,7 +28,7 @@ class DraftPostListView(ListView):
         unpublished_status = Status.objects.get(name="unpublished")
         context["post_lsit"] = Post.objects.filter(
             status=unpublished_status).filter(
-            author=self.request.user).order_by("created_on").reverse()
+            author=self.request.user).order_by("created_at").reverse()
         context["timestamp"] =datetime.now().strftime("%F %H:%M:%S")
         return context
 

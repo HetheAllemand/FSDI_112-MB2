@@ -28,7 +28,7 @@
                 <a class="nav-link" href="{% url 'post_new' %}">Create Post</a>
                 <a class="nav-link" href="{% url 'draft_posts' %}">Drafts</a>
                 <a class="nav-link" href="{% url 'logout' %}">Log out</a>
-            {% esle %}
+            {% else %}
                 <a class="nav-link" href="{% url 'login' %}">Log in</a>
                 <a class="nav-link" href="{% url 'signup' %}">Sign up</a>
             {% endif %}
